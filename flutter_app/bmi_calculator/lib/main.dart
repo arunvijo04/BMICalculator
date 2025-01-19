@@ -97,43 +97,117 @@ class _BMICalculatorState extends State<BMICalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFEFEFEF),
       appBar: AppBar(
+        backgroundColor: Color(0xFF6C63FF),
         title: const Text("BMI Calculator"),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: "Name"),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                "Track Your Health",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF6C63FF),
+                ),
+              ),
             ),
-            TextField(
-              controller: _ageController,
-              decoration: InputDecoration(labelText: "Age"),
-              keyboardType: TextInputType.number,
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: "Name",
+                        prefixIcon: Icon(Icons.person, color: Color(0xFF6C63FF)),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _ageController,
+                      decoration: InputDecoration(
+                        labelText: "Age",
+                        prefixIcon: Icon(Icons.calendar_today, color: Color(0xFF6C63FF)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _heightController,
+                      decoration: InputDecoration(
+                        labelText: "Height (m)",
+                        prefixIcon: Icon(Icons.height, color: Color(0xFF6C63FF)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _weightController,
+                      decoration: InputDecoration(
+                        labelText: "Weight (kg)",
+                        prefixIcon: Icon(Icons.fitness_center, color: Color(0xFF6C63FF)),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            TextField(
-              controller: _heightController,
-              decoration: InputDecoration(labelText: "Height (m)"),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: _weightController,
-              decoration: InputDecoration(labelText: "Weight (kg)"),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _calculateBMI,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF6C63FF), // Replace 'primary' with 'backgroundColor'
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               child: const Text("Calculate BMI"),
             ),
+
             ElevatedButton(
               onPressed: _showRecords,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF4CAF50), // Replace 'primary' with 'backgroundColor'
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               child: const Text("Show Records"),
             ),
-            const SizedBox(height: 16),
-            if (_result != null) Text(_result!),
+
+            const SizedBox(height: 20),
+            if (_result != null)
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    _result!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
